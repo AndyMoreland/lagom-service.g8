@@ -1,8 +1,7 @@
-A [Giter8][g8] template for ...!
+A [Giter8][g8] template for making new lagom services
 
 Template license
 ----------------
-Written in <YEAR> by <AUTHOR NAME> <AUTHOR E-MAIL ADDRESS>
 [other author/contributor lines as appropriate]
 
 To the extent possible under law, the author(s) have dedicated all copyright and related
