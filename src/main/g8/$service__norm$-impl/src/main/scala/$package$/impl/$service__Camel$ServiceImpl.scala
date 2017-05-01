@@ -1,5 +1,6 @@
 package $package$.impl
 
+import scala.concurrent.Future
 import akka.{Done, NotUsed}
 import com.lightbend.lagom.scaladsl.api.ServiceCall
 import com.lightbend.lagom.scaladsl.persistence.PersistentEntityRegistry
@@ -11,7 +12,7 @@ class $service;format="Camel"$ServiceImpl(registry: PersistentEntityRegistry)(im
   extends api.$service;format="Camel"$Service {
 
   override def apiCall: ServiceCall[String, akka.Done] = ServiceCall { _ =>
-    akka.Done
+    Future.successful(akka.Done)
   }
 
   private def refFor($service;format="camel"$Id: String) = {

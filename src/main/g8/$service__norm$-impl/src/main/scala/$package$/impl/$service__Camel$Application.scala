@@ -1,6 +1,7 @@
 package $package$.impl
 
 import com.lightbend.lagom.scaladsl.client.ConfigurationServiceLocatorComponents
+import com.lightbend.lagom.scaladsl.persistence.cassandra.CassandraPersistenceComponents
 import com.lightbend.lagom.scaladsl.devmode.LagomDevModeComponents
 import com.lightbend.lagom.scaladsl.server._
 import com.softwaremill.macwire._
@@ -10,16 +11,21 @@ import play.api.libs.ws.ahc.AhcWSComponents
 
 import scala.concurrent.ExecutionContext
 
-trait $service;format="Camel"$Components extends LagomServerComponents {
+trait $service;format="Camel"$Components extends LagomServerComponents with CassandraPersistenceComponents {
   implicit def executionContext: ExecutionContext
 
   def environment: Environment
+
+  override lazy val jsonSerializerRegistry = $service;format="Camel"$SerializerRegistry
+
+  persistentEntityRegistry.register(wire[$service;format="Camel"$Entity])
 }
 
 abstract class $service;format="Camel"$Application(context: LagomApplicationContext)
   extends LagomApplication(context)
     with AhcWSComponents
-    with GatewayComponents {
+    with CassandraPersistenceComponents
+    with $service;format="Camel"$Components {
 
   override lazy val lagomServer: LagomServer = LagomServer.forServices(
     bindService[api.$service;format="Camel"$Service].to(wire[$service;format="Camel"$ServiceImpl])
