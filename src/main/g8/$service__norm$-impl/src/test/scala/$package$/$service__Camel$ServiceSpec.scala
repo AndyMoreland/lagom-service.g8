@@ -1,8 +1,8 @@
-package money.haven.$package$.impl
+package $package$.impl
 
 import com.lightbend.lagom.scaladsl.server.LocalServiceLocator
 import com.lightbend.lagom.scaladsl.testkit.ServiceTest
-import money.$package$.api
+import $package$.api
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{AsyncWordSpec, BeforeAndAfterAll, Matchers}
 
