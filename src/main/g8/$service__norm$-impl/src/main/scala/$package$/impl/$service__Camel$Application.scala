@@ -8,6 +8,8 @@ import com.softwaremill.macwire._
 import $package$.api
 import play.api.Environment
 import play.api.libs.ws.ahc.AhcWSComponents
+import play.api.mvc.EssentialFilter
+import play.filters.cors.CORSComponents
 
 import scala.concurrent.ExecutionContext
 
@@ -25,7 +27,9 @@ abstract class $service;format="Camel"$Application(context: LagomApplicationCont
   extends LagomApplication(context)
     with AhcWSComponents
     with CassandraPersistenceComponents
-    with $service;format="Camel"$Components {
+    with $service;format="Camel"$Components
+    with CORSComponents {
+  override lazy val httpFilters: Seq[EssentialFilter] = Seq(corsFilter)
 
   override lazy val lagomServer: LagomServer = LagomServer.forServices(
     bindService[api.$service;format="Camel"$Service].to(wire[$service;format="Camel"$ServiceImpl])
