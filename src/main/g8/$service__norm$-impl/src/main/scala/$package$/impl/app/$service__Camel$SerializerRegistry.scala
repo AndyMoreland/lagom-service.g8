@@ -1,4 +1,4 @@
-package $package$.impl
+package $package$.impl.app
 
 import com.lightbend.lagom.scaladsl.playjson.{JsonSerializer, JsonSerializerRegistry}
 object $service;format="Camel"$SerializerRegistry extends JsonSerializerRegistry {

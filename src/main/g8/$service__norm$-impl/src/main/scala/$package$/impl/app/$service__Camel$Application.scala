@@ -1,4 +1,4 @@
-package $package$.impl
+package $package$.impl.app
 
 import com.lightbend.lagom.scaladsl.client.ConfigurationServiceLocatorComponents
 import com.lightbend.lagom.scaladsl.persistence.cassandra.CassandraPersistenceComponents
