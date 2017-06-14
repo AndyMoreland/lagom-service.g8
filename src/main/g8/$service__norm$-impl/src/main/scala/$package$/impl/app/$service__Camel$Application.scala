@@ -6,6 +6,7 @@ import com.lightbend.lagom.scaladsl.devmode.LagomDevModeComponents
 import com.lightbend.lagom.scaladsl.server._
 import com.softwaremill.macwire._
 import $package$.api
+import $package$.impl.$service;format="Camel"$ServiceImpl
 import play.api.Environment
 import play.api.libs.ws.ahc.AhcWSComponents
 import play.api.mvc.EssentialFilter
