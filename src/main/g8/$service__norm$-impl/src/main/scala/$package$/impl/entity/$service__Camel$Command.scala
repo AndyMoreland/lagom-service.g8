@@ -1,4 +1,4 @@
-package $package$.impl
+package $package$.impl.entity
 
 import com.lightbend.lagom.scaladsl.persistence.PersistentEntity.ReplyType
 import play.api.libs.json.{Format, Json}

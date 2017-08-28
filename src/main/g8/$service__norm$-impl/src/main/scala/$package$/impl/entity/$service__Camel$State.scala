@@ -1,4 +1,4 @@
-package $package$.impl
+package $package$.impl.entity
 
 import java.time.LocalDateTime
 import money.haven.utils.JsonFormats
