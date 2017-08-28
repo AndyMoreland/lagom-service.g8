@@ -2,7 +2,6 @@ package $package$.impl.app
 
 import akka.persistence.jdbc.config.SlickConfiguration
 import akka.persistence.jdbc.util.{SlickDatabase, SlickDriver}
-import akka.stream.scaladsl.Flow
 import com.auth0.jwt.algorithms.Algorithm
 import com.lightbend.lagom.scaladsl.broker.kafka.LagomKafkaComponents
 import com.lightbend.lagom.scaladsl.client.ConfigurationServiceLocatorComponents
@@ -13,6 +12,8 @@ import com.lightbend.lagom.scaladsl.server._
 import com.softwaremill.macwire._
 import com.typesafe.config.Config
 import money.haven.crypto.Secrets
+import money.haven.utils.security.JwtSignatureComponents
+import money.haven.utils.security.{JWTUtils, JwtSignatureComponents}
 import com.lightbend.lagom.scaladsl.client.ConfigurationServiceLocatorComponents
 import com.lightbend.lagom.scaladsl.persistence.cassandra.CassandraPersistenceComponents
 import com.lightbend.lagom.scaladsl.devmode.LagomDevModeComponents
@@ -55,12 +56,11 @@ abstract class $service;format="Camel"$Application(context: LagomApplicationCont
     with AhcWSComponents
     with $service;format="Camel"$Components
     with CORSComponents {
-  override lazy val httpFilters: Seq[EssentialFilter] = Seq(corsFilter)
+  override val httpFilters: Seq[EssentialFilter] = Seq(corsFilter)
 
   persistentEntityRegistry.register(wire[$service;format="Camel"$Entity])
 
-  override lazy val lagomServer: LagomServer = serverFor[$service;format="Camel"$Service].to(wire[$service;format="Camel"$ServiceImpl])
-  )
+  override lazy val lagomServer: LagomServer = serverFor[$service;format="Camel"$Service](wire[$service;format="Camel"$ServiceImpl])
 }
 
 class $service;format="Camel"$ApplicationLoader extends LagomApplicationLoader {
@@ -69,7 +69,7 @@ class $service;format="Camel"$ApplicationLoader extends LagomApplicationLoader {
       override def jwtSigningAlgorithm: Algorithm = JWTUtils.createAlgorithm(Secrets.jwtSigningSecret)
   }
 
-  override def loadDevMode(context: LagomApplicationContext) =
+  override def loadDevMode(context: LagomApplicationContext) = {
     val environment = context.playContext.environment
     LoggerConfigurator(environment.classLoader).forEach {
       _.configure(environment)

@@ -3,6 +3,7 @@ package $package$.impl.entity
 import com.lightbend.lagom.scaladsl.persistence.PersistentEntity
 import java.time.LocalDateTime
 import akka.Done
+import money.haven.macros.DSLBehavior
 
 class $service;format="Camel"$Entity extends PersistentEntity {
   override type Command = $service;format="Camel"$Command
@@ -17,13 +18,12 @@ class $service;format="Camel"$Entity extends PersistentEntity {
   }
 
   private val created = DSLBehavior.behavior[Actions] {
-    case $service;format="Camel"$DummyCommand(something) {
+    case $service;format="Camel"$DummyCommand(something) =>
         $service;format="Camel"$CreatedEvent(LocalDateTime.now) -> Done
-    }.onEvent {
-      case (event, state) => state
-    }
+  }.onEvent {
+    case (event, state) => state
   }
 
-  private val notCreated = DSLBehavior.behavior[Actions]
+  private val notCreated = Actions()
 
 }
