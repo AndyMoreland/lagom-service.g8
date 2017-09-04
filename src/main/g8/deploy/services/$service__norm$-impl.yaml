@@ -1,0 +1,57 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: $service__norm$-service
+spec:
+  selector:
+    app: $service__norm$
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: $service__norm$-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: $service__norm$
+    spec:
+      containers:
+      - name: $service__norm$
+        image: gcr.io/haven-165323/188fe5eba394447de10e92b91fc84852a8aed700/$service__norm$:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: username
+
+      - name: cloudsql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:1.09
+        command: ["/cloud_sql_proxy", "--dir=/cloudsql",
+                  "-instances=haven-165323:us-central1:haven-prod-mysql=tcp:3306",
+                  "-credential_file=/secrets/cloudsql/credentials.json"]
+        volumeMounts:
+          - name: cloudsql-instance-credentials
+            mountPath: /secrets/cloudsql
+            readOnly: true
+          - name: ssl-certs
+            mountPath: /etc/ssl/certs
+          - name: cloudsql
+            mountPath: /cloudsql
+      volumes:
+        - name: cloudsql-instance-credentials
+          secret:
+            secretName: cloudsql-instance-credentials
+        - name: ssl-certs
+          hostPath:
+            path: /etc/ssl/certs
+        - name: cloudsql
+          emptyDir:
