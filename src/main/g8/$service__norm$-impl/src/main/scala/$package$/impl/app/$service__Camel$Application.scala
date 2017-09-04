@@ -82,6 +82,6 @@ class $service;format="Camel"$ApplicationLoader extends LagomApplicationLoader {
   }
 
   override def describeServices = List(
-    readDescriptor[api.$service;format="Camel"$Service]
+    readDescriptor[$service;format="Camel"$Service]
   )
 }

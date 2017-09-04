@@ -5,6 +5,7 @@ import akka.{Done, NotUsed}
 import com.lightbend.lagom.scaladsl.api.ServiceCall
 import com.lightbend.lagom.scaladsl.persistence.PersistentEntityRegistry
 import $package$.api
+import $package$.impl.entity.$service;format="Camel"$Entity
 
 import scala.concurrent.ExecutionContext
 

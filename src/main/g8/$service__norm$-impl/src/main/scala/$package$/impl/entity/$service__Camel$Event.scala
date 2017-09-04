@@ -2,7 +2,7 @@ package $package$.impl.entity
 
 import java.time.LocalDateTime
 
-import com.lightbend.scaladsl.playjson.JsonSerializer
+import com.lightbend.lagom.scaladsl.playjson.JsonSerializer
 import play.api.libs.json.Json
 
 sealed trait $service;format="Camel"$Event
