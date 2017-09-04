@@ -75,7 +75,5 @@ class $service;format="Camel"$ApplicationLoader extends LagomApplicationLoader {
       override def jwtSigningAlgorithm: Algorithm = JWTUtils.createAlgorithm(Secrets.jwtSigningSecret)
     }
 
-  override def describeServices = List(
-    readDescriptor[$service;format="Camel"$Service]
-  )
+  override def describeService = Some(readDescriptor[$service;format="Camel"$Service])
 }
