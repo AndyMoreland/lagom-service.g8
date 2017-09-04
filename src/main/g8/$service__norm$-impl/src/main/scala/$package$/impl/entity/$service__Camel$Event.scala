@@ -10,7 +10,7 @@ sealed trait $service;format="Camel"$Event
 case class $service;format="Camel"$CreatedEvent(created: LocalDateTime)
   extends $service;format="Camel"$Event
 
-object $service;format="Camel"$CreatedEvent {
+object $service;format="Camel"$Event {
   val serializers = Vector(
     JsonSerializer(Json.format[$service;format="Camel"$CreatedEvent])
   )

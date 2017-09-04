@@ -26,7 +26,7 @@ import play.api.Environment
 import play.api.libs.ws.ahc.AhcWSComponents
 import play.api.mvc.EssentialFilter
 import play.filters.cors.CORSComponents
-import play.api.{Environment, LoggerConfigurator}
+import play.api.Environment
 import play.api.db.{DBComponents, HikariCPComponents}
 import slick.jdbc.{JdbcBackend, JdbcProfile}
 
@@ -70,16 +70,10 @@ class $service;format="Camel"$ApplicationLoader extends LagomApplicationLoader {
       override def jwtSigningAlgorithm: Algorithm = JWTUtils.createAlgorithm(Secrets.jwtSigningSecret)
   }
 
-  override def loadDevMode(context: LagomApplicationContext) = {
-    val environment = context.playContext.environment
-    LoggerConfigurator(environment.classLoader).forEach {
-      _.configure(environment)
-    }
-
+  override def loadDevMode(context: LagomApplicationContext) =
     new $service;format="Camel"$Application(context) with LagomDevModeComponents with LagomKafkaComponents {
       override def jwtSigningAlgorithm: Algorithm = JWTUtils.createAlgorithm(Secrets.jwtSigningSecret)
     }
-  }
 
   override def describeServices = List(
     readDescriptor[$service;format="Camel"$Service]
