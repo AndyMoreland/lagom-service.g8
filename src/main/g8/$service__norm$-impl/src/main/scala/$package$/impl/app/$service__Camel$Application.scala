@@ -21,6 +21,7 @@ import com.lightbend.lagom.scaladsl.server._
 import com.softwaremill.macwire._
 import $package$.api.$service;format="Camel"$Service
 import $package$.impl.$service;format="Camel"$ServiceImpl
+import $package$.impl.entity.$service;format="Camel"$Entity
 import play.api.Environment
 import play.api.libs.ws.ahc.AhcWSComponents
 import play.api.mvc.EssentialFilter

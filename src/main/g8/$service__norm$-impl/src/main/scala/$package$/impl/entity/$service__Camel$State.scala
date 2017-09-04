@@ -1,12 +1,14 @@
 package $package$.impl.entity
 
+import com.lightbend.lagom.scaladsl.playjson.JsonSerializer
 import java.time.LocalDateTime
 import money.haven.utils.JsonFormats
 import play.api.libs.json.{Format, Json}
 
+case class $service;format="Camel"$State(id: String, created: LocalDateTime)
 
 object $service;format="Camel"$State {
-  implicit val format: Format[$service;format="Camel"$State] = Json.format
+  val serializers = Vector(
+    JsonSerializer(Json.format[$service;format="Camel"$State])
+  )
 }
-
-case class $service;format="Camel"$State(id: String, created: LocalDateTime)
