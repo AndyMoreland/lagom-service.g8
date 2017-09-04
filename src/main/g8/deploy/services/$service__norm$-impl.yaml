@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: $service__norm$-service
+  name: $service;format="normalize"$-service
 spec:
   selector:
-    app: $service__norm$
+    app: $service;format="normalize"$
   ports:
     - protocol: TCP
       port: 8080
@@ -13,17 +13,17 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: $service__norm$-deployment
+  name: $service;format="normalize"$-deployment
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: $service__norm$
+        app: $service;format="normalize"$
     spec:
       containers:
-      - name: $service__norm$
-        image: gcr.io/haven-165323/188fe5eba394447de10e92b91fc84852a8aed700/$service__norm$:latest
+      - name: $service;format="normalize"$
+        image: gcr.io/haven-165323/188fe5eba394447de10e92b91fc84852a8aed700/$service;format="normalize"$:latest
         ports:
         - containerPort: 8080
         env:
