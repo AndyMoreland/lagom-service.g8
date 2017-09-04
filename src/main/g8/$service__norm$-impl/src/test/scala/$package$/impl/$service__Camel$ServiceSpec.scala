@@ -2,12 +2,13 @@ package $package$.impl
 
 import com.lightbend.lagom.scaladsl.api.AdditionalConfiguration
 import com.lightbend.lagom.scaladsl.server.LocalServiceLocator
-import com.lightbend.lagom.scaladsl.testkit.ServiceTest
+import com.lightbend.lagom.scaladsl.testkit.{ServiceTest, TestTopicComponents}
 import $package$.api
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{AsyncWordSpec, BeforeAndAfterAll, Matchers}
 import $package$.impl.app.$service;format="Camel"$Application
 import money.haven.utils.security.{ClientSecurity, JWTUtils, SimpleJwtAlgorithm}
+import money.haven.utils.JdbcTestHelper
 
 class $service;format="Camel"$ServiceSpec extends AsyncWordSpec with Matchers with BeforeAndAfterAll with ScalaFutures {
 
