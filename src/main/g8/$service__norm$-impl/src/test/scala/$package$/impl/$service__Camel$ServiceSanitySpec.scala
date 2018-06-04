@@ -1,6 +1,7 @@
 package $package$.impl
 
-import money.haven.utils.specs.{HavenSpec, HavenSanitySpec}
+import $package$.plan.api._
+import money.haven.utils.specs.{HavenSpec, ServiceSanitySpec}
 
 class $service;format="Camel"$ServiceSanitySpec extends HavenSpec {
   describe("$service;format="Camel"$Service") {
