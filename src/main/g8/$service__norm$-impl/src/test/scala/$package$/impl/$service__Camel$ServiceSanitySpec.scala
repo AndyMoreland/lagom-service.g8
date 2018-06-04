@@ -1,4 +1,4 @@
-package $package$.api
+package $package$.impl
 
 import money.haven.utils.specs.{HavenSpec, HavenSanitySpec}
 
