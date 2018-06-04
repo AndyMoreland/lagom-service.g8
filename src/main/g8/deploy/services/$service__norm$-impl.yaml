@@ -32,9 +32,9 @@ spec:
         - containerPort: 22222
         - containerPort: 9095
         args: [
-          "-Dconfig.resource=$(SERVICE_CONFIG_RESOURCE)",
+          "-Dconfig.resource=\$(SERVICE_CONFIG_RESOURCE)",
           "-Dlogger.resource=logback.prod.xml",
-          "-Dsentry.dsn=$(SENTRY_DSN)",
+          "-Dsentry.dsn=\$(SENTRY_DSN)",
           "-Dsecrets.overrideFilePath=/secrets/service/secrets.prod.conf"
         ]
         envFrom:
@@ -75,7 +75,7 @@ spec:
               key: SQL_INSTANCE
         command: ["/cloud_sql_proxy", "--dir=/cloudsql",
                   "-credential_file=/secrets/cloudsql/credentials.json"]
-        args: ["-instances=$(SQL_INSTANCE)"]
+        args: ["-instances=\$(SQL_INSTANCE)"]
         volumeMounts:
           - name: cloudsql-instance-credentials
             mountPath: /secrets/cloudsql
