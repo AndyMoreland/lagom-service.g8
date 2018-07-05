@@ -3,7 +3,6 @@ package $package$.impl.app
 import com.auth0.jwt.algorithms.Algorithm
 import com.lightbend.lagom.scaladsl.api.Service
 import com.lightbend.lagom.scaladsl.broker.kafka.LagomKafkaComponents
-import com.lightbend.lagom.scaladsl.client.ConfigurationServiceLocatorComponents
 import com.lightbend.lagom.scaladsl.devmode.LagomDevModeComponents
 import com.lightbend.lagom.scaladsl.server._
 import com.softwaremill.macwire._
@@ -14,6 +13,7 @@ import money.haven.utils.entities.history.{HavenReadSidePersistenceComponents, H
 import money.haven.utils.security.JWTUtils
 import money.haven.utils.serialization.HavenSerializerRegistry
 import money.haven.utils.services.application.HavenApplication
+import money.haven.utils.services.application.HavenProdComponents
 
 abstract class $service;format="Camel"$Application(context: LagomApplicationContext)
     extends HavenApplication(context)
@@ -29,7 +29,7 @@ abstract class $service;format="Camel"$Application(context: LagomApplicationCont
 
 class $service;format="Camel"$ApplicationLoader extends LagomApplicationLoader {
   override def load(context: LagomApplicationContext) =
-    new $service;format="Camel"$Application(context) with ConfigurationServiceLocatorComponents with LagomKafkaComponents {
+    new $service;format="Camel"$Application(context) with HavenProdComponents with LagomKafkaComponents {
       override def jwtSigningAlgorithm: Algorithm = JWTUtils.createAlgorithm(Secrets.jwtSigningSecret)
     }
 

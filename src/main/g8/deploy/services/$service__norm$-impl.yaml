@@ -4,7 +4,7 @@ metadata:
   name: $service;format="normalize"$-impl-service
 spec:
   selector:
-    app: $service;format="normalize"$-impl-service
+    app: $service;format="normalize"$-impl
   ports:
     - protocol: TCP
       port: 8080
